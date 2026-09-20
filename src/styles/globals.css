@@ -1,0 +1,470 @@
+@import 'tailwindcss';
+
+/* ================================================================
+   DESIGN TOKENS
+   ================================================================ */
+@theme {
+  /* ---- Color Palette ---- */
+  --color-background: #FAF8F4;
+  --color-surface: #FFFFFF;
+  --color-text: #0D0D0D;
+  --color-muted: #5A5551;
+  --color-primary: #FF5018;
+  --color-primary-tint: #FFE0D1;
+  --color-primary-hover: #E8470F;
+  --color-secondary: #381D2A;
+  --color-secondary-tint: #EFE6E9;
+  --color-border: #E5E1DB;
+  --color-success: #16A34A;
+  --color-warning: #F59E0B;
+  --color-error: #DC2626;
+
+  /* ---- Dark Mode Colors ---- */
+  --color-dark-background: #1A0F14;
+  --color-dark-surface: #2A1520;
+  --color-dark-text: #F5F0EB;
+  --color-dark-muted: #A89E99;
+  --color-dark-border: #4A2E3A;
+  --color-dark-primary-tint: #3D1A0A;
+  --color-dark-secondary-tint: #2A1520;
+
+  /* ---- Typography ---- */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* ---- Border Radius Scale ---- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+  /* ---- Transitions ---- */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ---- Z-index Scale ---- */
+  --z-dropdown: 50;
+  --z-sticky: 100;
+  --z-overlay: 150;
+  --z-modal: 200;
+  --z-toast: 300;
+}
+
+
+/* ================================================================
+   CSS RESET & BASE
+   ================================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+
+/* ================================================================
+   TYPOGRAPHY — Fluid Modular Scale using clamp()
+   ================================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.25rem, 4vw + 1rem, 3.75rem); }
+h2 { font-size: clamp(1.75rem, 3vw + 0.5rem, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 1.5vw + 0.5rem, 1.5rem); }
+h4 { font-size: clamp(1.125rem, 1vw + 0.5rem, 1.25rem); }
+
+p {
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+
+/* ================================================================
+   DARK MODE
+   ================================================================ */
+html.dark body {
+  color: var(--color-dark-text);
+  background-color: var(--color-dark-background);
+}
+
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 {
+  color: var(--color-dark-text);
+}
+
+html.dark p {
+  color: var(--color-dark-muted);
+}
+
+html.dark .bg-surface {
+  background-color: var(--color-dark-surface);
+}
+
+html.dark .text-muted {
+  color: var(--color-dark-muted);
+}
+
+html.dark .border-default {
+  border-color: var(--color-dark-border);
+}
+
+html.dark .bg-primary-tint {
+  background-color: var(--color-dark-primary-tint);
+}
+
+html.dark .bg-secondary-tint {
+  background-color: var(--color-dark-secondary-tint);
+}
+
+html.dark .bg-background {
+  background-color: var(--color-dark-background);
+}
+
+/* Dark mode: form inputs */
+html.dark .input-field {
+  background-color: var(--color-dark-surface);
+  border-color: var(--color-dark-border);
+  color: var(--color-dark-text);
+}
+
+
+/* ================================================================
+   FOCUS STYLES (WCAG 2.1 AA)
+   ================================================================ */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+
+/* ================================================================
+   SCROLLBAR
+   ================================================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: var(--color-dark-background);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-dark-border);
+}
+
+
+/* ================================================================
+   SELECTION
+   ================================================================ */
+::selection {
+  background-color: var(--color-primary-tint);
+  color: var(--color-text);
+}
+
+html.dark ::selection {
+  background-color: var(--color-dark-primary-tint);
+  color: var(--color-dark-text);
+}
+
+
+/* ================================================================
+   REDUCED MOTION
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ================================================================
+   LAYOUT UTILITIES
+   ================================================================ */
+.container-main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .container-main {
+    padding: 0 1rem;
+  }
+}
+
+.section-padding {
+  padding: 5rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 3rem 0;
+  }
+}
+
+
+/* ================================================================
+   REUSABLE COMPONENT CLASSES
+   ================================================================ */
+
+/* -- Section heading block (centered title + subtitle) -- */
+.section-heading {
+  text-align: center;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3.5rem;
+}
+
+.section-heading h1,
+.section-heading h2 {
+  margin-bottom: 1rem;
+}
+
+.section-heading p {
+  font-size: clamp(1rem, 1vw + 0.5rem, 1.125rem);
+}
+
+/* -- Gradient text -- */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #FF8A65 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* -- Glass card -- */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}
+
+html.dark .glass-card {
+  background: rgba(42, 21, 32, 0.7);
+  border-color: var(--color-dark-border);
+}
+
+/* -- Reusable form input field -- */
+.input-field {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input-field::placeholder {
+  color: var(--color-muted);
+  opacity: 0.7;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(255, 80, 24, 0.1);
+}
+
+.input-field[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.input-field[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* -- Dark-background input variant (for ClinicianBanner etc.) -- */
+.input-field-dark {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input-field-dark::placeholder {
+  color: rgba(156, 163, 175, 0.8);
+}
+
+.input-field-dark:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(255, 80, 24, 0.15);
+}
+
+/* -- Form label -- */
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 0.375rem;
+}
+
+html.dark .form-label {
+  color: var(--color-dark-text);
+}
+
+/* -- Form error message -- */
+.form-error {
+  font-size: 0.75rem;
+  color: var(--color-error);
+  margin-top: 0.25rem;
+}
+
+
+/* ================================================================
+   SCROLL REVEAL ANIMATIONS
+   ================================================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Elements with [data-reveal] start hidden and animate when .revealed is added */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children: each child gets a progressive delay */
+[data-reveal-stagger] > [data-reveal]:nth-child(1) { transition-delay: 0ms; }
+[data-reveal-stagger] > [data-reveal]:nth-child(2) { transition-delay: 80ms; }
+[data-reveal-stagger] > [data-reveal]:nth-child(3) { transition-delay: 160ms; }
+[data-reveal-stagger] > [data-reveal]:nth-child(4) { transition-delay: 240ms; }
+[data-reveal-stagger] > [data-reveal]:nth-child(5) { transition-delay: 320ms; }
+[data-reveal-stagger] > [data-reveal]:nth-child(6) { transition-delay: 400ms; }
+
+
+/* ================================================================
+   HEADER / NAVBAR SCROLL STATE
+   ================================================================ */
+.header-scrolled {
+  box-shadow: var(--shadow-md);
+  border-bottom-color: transparent;
+}
+
+html.dark .header-scrolled {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile menu backdrop */
+.mobile-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: calc(var(--z-sticky) - 1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+.mobile-menu-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Nav link active indicator */
+.nav-link-active {
+  position: relative;
+}
+
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 1px;
+}
