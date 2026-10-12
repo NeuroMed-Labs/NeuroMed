@@ -30,14 +30,16 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 text-white no-underline hover:text-[var(--color-primary-tint)] mb-4 inline-flex">
-              <Brain className="h-6 w-6 text-[var(--color-primary)]" aria-hidden="true" />
-              <span className="font-display text-lg font-bold tracking-tight">
-                Neuromed
+            <Link to="/" className="flex items-center gap-2.5 text-white no-underline hover:opacity-90 mb-4 inline-flex">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 via-sky-400 to-cyan-300 flex items-center justify-center shadow-sm">
+                <Brain className="h-4.5 w-4.5 text-white stroke-[2.2]" />
+              </div>
+              <span className="font-bold text-xl tracking-tight text-white font-sans">
+                NeuroMed
               </span>
             </Link>
-            <p className="text-sm text-gray-400 leading-relaxed mb-4">
-              AI-powered brain tumor detection with clinical-grade accuracy and explainable results for healthcare professionals.
+            <p className="text-sm text-slate-400 leading-relaxed mb-4">
+              AI-powered brain tumor diagnostics with clinical-grade accuracy and explainable results for healthcare professionals.
             </p>
             <div className="flex items-center gap-3">
               <a

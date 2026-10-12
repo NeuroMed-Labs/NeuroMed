@@ -1,15 +1,15 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, Moon, Sun } from 'lucide-react';
+import { Menu, X, Moon, Sun, Info, Brain } from 'lucide-react';
 import { useDarkMode } from '@/hooks/useDarkMode';
-import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'Features', href: '/features' },
   { label: 'How It Works', href: '/how-it-works' },
-  { label: 'About', href: '/about' },
+  { label: 'MRI Analysis', href: '/analyze' },
+  { label: 'Clinical', href: '/features' },
+  { label: 'Referral Network', href: '/#referral-network' },
+  { label: 'About', href: '/about', hasInfoIcon: true },
 ];
 
 export function Header() {
@@ -45,63 +45,68 @@ export function Header() {
     <>
       <header
         className={cn(
-          'sticky top-0 z-[var(--z-sticky)] border-b bg-[var(--color-background)]/90 backdrop-blur-md transition-all duration-300',
+          'sticky top-0 z-[var(--z-sticky)] bg-white/90 dark:bg-[#0B1120]/90 backdrop-blur-md transition-all duration-300',
           scrolled
-            ? 'header-scrolled border-transparent'
-            : 'border-[var(--color-border)]',
+            ? 'header-scrolled border-b border-slate-200/80 dark:border-slate-800'
+            : 'border-b border-slate-100 dark:border-slate-800/60',
         )}
         role="banner"
       >
         <nav
-          className="w-full max-w-7xl mx-auto flex items-center justify-between gap-6 px-4 sm:px-6 lg:px-10 py-3 md:py-4"
+          className="w-full max-w-7xl mx-auto flex items-center justify-between gap-6 px-4 sm:px-6 lg:px-8 py-3.5"
           aria-label="Main navigation"
         >
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center px-5 py-2 text-[#381d2a] dark:text-white hover:opacity-80 transition-opacity no-underline"
+            className="flex items-center gap-2.5 text-[#0F172A] dark:text-white hover:opacity-90 transition-opacity no-underline group"
             onClick={closeMobile}
           >
-            <span className="px-500 py-2  font-sans text-2xl font-semibold tracking-tight">
-              neuroMed
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 via-sky-400 to-cyan-300 flex items-center justify-center shadow-sm shadow-blue-500/20 group-hover:scale-105 transition-transform">
+              <Brain className="h-4.5 w-4.5 text-white stroke-[2.2]" />
+            </div>
+            <span className="font-bold text-xl tracking-tight text-slate-900 dark:text-white font-sans">
+              NeuroMed
             </span>
           </Link>
 
           {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-1.5 list-none m-0 p-0">
+          <ul className="hidden md:flex items-center gap-7 list-none m-0 p-0">
             {NAV_LINKS.map((link) => (
-              <li key={link.href}>
+              <li key={link.label}>
                 <NavLink
                   to={link.href}
                   className={({ isActive }) =>
                     cn(
-                      'relative px-4 py-2 rounded-[var(--radius-sm)] text-sm font-medium transition-all duration-200 no-underline',
-                      isActive
-                        ? 'text-[var(--color-primary)] bg-[var(--color-primary-tint)] nav-link-active'
-                        : 'text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-secondary-tint)]',
+                      'flex items-center gap-1.5 text-sm font-medium transition-colors duration-150 no-underline',
+                      isActive && link.href !== '/#referral-network'
+                        ? 'text-blue-700 dark:text-blue-400 font-semibold'
+                        : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white',
                     )
                   }
                   end={link.href === '/'}
                 >
-                  {link.label}
+                  {link.hasInfoIcon && <Info className="h-4 w-4 text-slate-400" />}
+                  <span>{link.label}</span>
                 </NavLink>
               </li>
             ))}
           </ul>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-[var(--radius-sm)] text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-secondary-tint)] transition-all duration-200 cursor-pointer border-none bg-transparent flex items-center justify-center"
+              className="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer border-none bg-transparent flex items-center justify-center"
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
-            <Link to="/login" className="no-underline">
-              <Button variant="ghost" className="px-500 py-2">
-                Log In
-              </Button>
+            <Link to="/analyze" className="no-underline">
+              <button className="px-5 py-2.5 rounded-full bg-[#1E40AF] hover:bg-[#1D4ED8] active:scale-95 text-white text-sm font-semibold border-none cursor-pointer shadow-sm hover:shadow transition-all duration-150 flex items-center gap-2">
+                <span>Access Platform</span>
+                <span className="text-base leading-none">&rarr;</span>
+              </button>
             </Link>
           </div>
 
@@ -155,10 +160,10 @@ export function Header() {
             ))}
             <hr className="border-[var(--color-border)] my-3" />
             <div className="pt-1">
-              <Link to="/login" onClick={closeMobile} className="block no-underline">
-                <Button variant="outline" className="w-full px-5 py-2">
-                  Log In
-                </Button>
+              <Link to="/analyze" onClick={closeMobile} className="block no-underline">
+                <button className="w-full py-3 rounded-full bg-[#1E40AF] text-white font-semibold text-center border-none shadow cursor-pointer">
+                  Access Platform &rarr;
+                </button>
               </Link>
             </div>
           </div>

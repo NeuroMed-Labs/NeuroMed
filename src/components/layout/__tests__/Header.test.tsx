@@ -14,23 +14,23 @@ function renderHeader() {
 }
 
 describe('Header', () => {
-  it('renders the Neuromed brand name', () => {
+  it('renders the NeuroMed brand name', () => {
     renderHeader();
-    expect(screen.getByText('Neuromed')).toBeInTheDocument();
+    expect(screen.getByText('NeuroMed')).toBeInTheDocument();
   });
 
   it('renders navigation links', () => {
     renderHeader();
-    expect(screen.getAllByText('Home').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Features').length).toBeGreaterThan(0);
     expect(screen.getAllByText('How It Works').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('MRI Analysis').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Clinical').length).toBeGreaterThan(0);
     expect(screen.getAllByText('About').length).toBeGreaterThan(0);
   });
 
-  it('renders the Analyze MRI CTA button', () => {
+  it('renders the Access Platform CTA button', () => {
     renderHeader();
-    const analyzeButtons = screen.getAllByText('Analyze MRI');
-    expect(analyzeButtons.length).toBeGreaterThan(0);
+    const accessButtons = screen.getAllByText('Access Platform');
+    expect(accessButtons.length).toBeGreaterThan(0);
   });
 
   it('has a mobile menu toggle button', () => {

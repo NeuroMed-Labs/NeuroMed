@@ -5,32 +5,32 @@
    ================================================================ */
 @theme {
   /* ---- Color Palette ---- */
-  --color-background: #FAF8F4;
+  --color-background: #FFFFFF;
   --color-surface: #FFFFFF;
-  --color-text: #0D0D0D;
-  --color-muted: #5A5551;
-  --color-primary: #FF5018;
-  --color-primary-tint: #FFE0D1;
-  --color-primary-hover: #E8470F;
-  --color-secondary: #381D2A;
-  --color-secondary-tint: #EFE6E9;
-  --color-border: #E5E1DB;
-  --color-success: #16A34A;
+  --color-text: #0F172A;
+  --color-muted: #64748B;
+  --color-primary: #1D4ED8;
+  --color-primary-tint: #EFF6FF;
+  --color-primary-hover: #1E40AF;
+  --color-secondary: #0F172A;
+  --color-secondary-tint: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-success: #10B981;
   --color-warning: #F59E0B;
-  --color-error: #DC2626;
+  --color-error: #EF4444;
 
   /* ---- Dark Mode Colors ---- */
-  --color-dark-background: #1A0F14;
-  --color-dark-surface: #2A1520;
-  --color-dark-text: #F5F0EB;
-  --color-dark-muted: #A89E99;
-  --color-dark-border: #4A2E3A;
-  --color-dark-primary-tint: #3D1A0A;
-  --color-dark-secondary-tint: #2A1520;
+  --color-dark-background: #0B1120;
+  --color-dark-surface: #131E36;
+  --color-dark-text: #F8FAFC;
+  --color-dark-muted: #94A3B8;
+  --color-dark-border: #1E293B;
+  --color-dark-primary-tint: #1E3A8A;
+  --color-dark-secondary-tint: #1E293B;
 
   /* ---- Typography ---- */
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* ---- Border Radius Scale ---- */
   --radius-sm: 6px;
@@ -289,10 +289,21 @@ html.dark ::selection {
 
 /* -- Gradient text -- */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-primary) 0%, #FF8A65 100%);
+  background: linear-gradient(135deg, #1D4ED8 0%, #0284C7 50%, #38BDF8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* -- Dot Grid Pattern -- */
+.bg-dot-grid {
+  background-image: radial-gradient(#CBD5E1 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+
+html.dark .bg-dot-grid {
+  background-image: radial-gradient(#1E293B 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
 }
 
 /* -- Glass card -- */

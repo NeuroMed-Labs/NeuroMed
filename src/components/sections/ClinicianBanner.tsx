@@ -37,20 +37,20 @@ export function ClinicianBanner() {
     <section className="section-padding" aria-label="Clinician waitlist" ref={sectionRef}>
       <div className="container-main">
         <div
-          className="rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-secondary)] to-[#2A1520] p-8 md:p-12 lg:p-16 text-center relative overflow-hidden"
+          className="rounded-3xl bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#1E3A8A] p-8 md:p-12 lg:p-16 text-center relative overflow-hidden shadow-2xl"
           data-reveal
         >
           {/* Decorative circles */}
-          <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-[var(--color-primary)] opacity-[0.08] blur-3xl" aria-hidden="true" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-[var(--color-primary)] opacity-[0.05] blur-3xl" aria-hidden="true" />
+          <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-blue-500 opacity-[0.12] blur-3xl" aria-hidden="true" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-cyan-400 opacity-[0.08] blur-3xl" aria-hidden="true" />
 
           <div className="relative z-10 max-w-xl mx-auto">
-            <h2 className="text-white text-2xl md:text-3xl mb-4">
+            <h2 className="text-white text-2xl md:text-3xl mb-4 font-bold">
               Built for Clinicians.{' '}
-              <span className="text-[var(--color-primary)]">By Clinicians.</span>
+              <span className="text-blue-400">By Clinicians.</span>
             </h2>
-            <p className="text-gray-400 mb-8">
-              Join the waitlist to get early access to Neuromed and help shape the
+            <p className="text-slate-300 mb-8">
+              Join the waitlist to get early access to NeuroMed and help shape the
               future of AI-assisted neuroimaging.
             </p>
 

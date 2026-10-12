@@ -1,24 +1,37 @@
 import { PageContainer } from '@/components/layout/PageContainer';
 import { Hero } from '@/components/sections/Hero';
-import { ProductPreview } from '@/components/sections/ProductPreview';
-import { WorkflowSteps } from '@/components/sections/WorkflowSteps';
+import { MultimodalShowcase } from '@/components/sections/MultimodalShowcase';
 import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
+import { FeatureMriIntelligence } from '@/components/sections/FeatureMriIntelligence';
+import { FeatureClinicalSystem } from '@/components/sections/FeatureClinicalSystem';
 import { TrustSection } from '@/components/sections/TrustSection';
 import { ClinicianBanner } from '@/components/sections/ClinicianBanner';
 
 export default function Home() {
   return (
     <PageContainer>
-      <title>Neuromed — AI-Powered Brain Tumor Detection</title>
+      <title>NeuroMed — AI-Powered Brain Tumor Diagnostics</title>
       <meta
         name="description"
-        content="Upload brain MRI scans and receive instant AI classification with confidence scores and Grad-CAM explainability. Built for radiologists and neurologists."
+        content="Clinical Decision Support System (CDSS) for radiologists and physicians. Enhance diagnostic confidence with AI-powered MRI analysis and a seamless cross-consultation network."
       />
 
+      {/* Photo 1: Hero */}
       <Hero />
-      <ProductPreview />
-      <WorkflowSteps />
+
+      {/* Photo 2: Multimodal & Specialist Referral Showcase */}
+      <MultimodalShowcase />
+
+      {/* Photo 3: How It Works 3-Step Flow */}
       <HowItWorksSection />
+
+      {/* Photo 4: 01 / MRI Intelligence Feature */}
+      <FeatureMriIntelligence />
+
+      {/* Photo 5: 02 / Clinical System Feature */}
+      <FeatureClinicalSystem />
+
+      {/* Clinical Trust & Waitlist */}
       <TrustSection />
       <ClinicianBanner />
     </PageContainer>
